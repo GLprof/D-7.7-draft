@@ -1,0 +1,127 @@
+python -m venv venv
+
+venv\scripts\activate
+
+pip install django
+
+django-admin startproject pagenews
+
+python manage.py startapp simpleapp
+
+cd pagenews
+
+title_news    # название новости
+
+description_news   # описание новости
+
+cost_news    # стоимость новости (а что?)
+
+category_news
+
+category_name
+
+'django.contrib.sites',     
+'django.contrib.flatpages',     эти 2 штуки для созданя страничек, добавлять в setting
+
+
+SITE_ID=1
+
+'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'  в MIDDLEWARE это чтобы приложения отработали нормально
+
+from django.contrib import admin
+from django.urls import path, include
+
+os.path.join(BASE_DIR, 'templates')   это в переменную 'DIRS' =[] между скобками
+
+path('pages/', include('django.contrib.flatpages.urls')),  # это в какой-то urls.py (в какой, не помню)
+
+	
+	python manage.py migrate
+
+	python manage.py makemigrations
+
+	python manage.py runserver     text_news = models.TextField()  http://127.0.0.1:8000/
+
+	python manage.py shell	
+
+	python manage.py createsuperuser
+
+	python -m pip install django-filter
+
+	glprof                  glprofnews      huckster
+
+	default.html
+
+______________________________________________________________________
+
+Правильный код для default.html
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Bare - Start Bootstrap Template</title>
+        <title>{% block title %} {% endblock title %}</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        {% load static %}
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+   <div class="container">
+       <a class="navbar-brand" href="#">Django flatpages</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse"
+               data-target="#navbarResponsive"
+               aria-controls="navbarResponsive" aria-expanded="false"
+               aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarResponsive">
+           <ul class="navbar-nav ml-auto">
+               <li class="nav-item active">
+                   <a class="nav-link" href="#">Home
+                       <span class="sr-only">(current)</span>
+                   </a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="/news/">News</a>      #тут своё имя файла и шапки для него
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="/category/">Category</a>   # и тут своё имя файла и шапки для него
+               </li>
+           </ul>
+       </div>
+   </div>
+</nav>
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    {% block content %}
+                    {{ flatpage.content }}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+text_news = models.TextField()
+
+: {self.text_news}	
+
+
+___________________________________________
+    for i in range(len(words)):
+        if words[i].lower() in CENSOR_WORDS:
+            words[i] = "*" * (len(words[i])-1)
+
+
+____________________________________________
+
+from news models import *           (это в Django Shell импортирует сразу все модели)
